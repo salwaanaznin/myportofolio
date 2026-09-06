@@ -194,15 +194,18 @@ h1, .brand {
     }
 }
 
+/* Styling section EDUCATION*/
+
 
 .education-section {
     max-width: 1100px;
-    margin: 40px auto;
+    margin: 40px auto; /* Mengatur posisi bagian agar berada di tengah layar */
     padding: 0 24px 0 60px; 
     box-sizing: border-box;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Judul bagian pendidikan */
 .edu-title {
     color: #d95d39; 
     font-size: 0.95rem;
@@ -211,19 +214,22 @@ h1, .brand {
     margin-bottom: 12px;
 }
 
+/* Garis tipis pemisah antar kategori */
 .edu-divider {
     height: 1px;
     background-color: #e5e7eb; 
     width: 100%;
 }
 
+/* Garis tipis pemisah antar item */
 .edu-item {
-    display: flex;
-    justify-content: space-between;
+    display: flex; /* Mengatur posisi teks nama tempat dan tahun agar sejajar */
+    justify-content: space-between; /* Memberi jarak otomatis ke ujung kiri dan kanan */
     align-items: flex-start;
     padding: 16px 0;
 }
 
+/* Judul tempat pendidikan */
 .edu-info h3 {
     margin: 0 0 4px 0;
     font-size: 1.05rem;
@@ -231,25 +237,21 @@ h1, .brand {
     color: #111827;
 }
 
+/* Penjelasan tempat pendidikan */
 .edu-info p {
     margin: 0;
     font-size: 0.95rem;
     color: #6b7280;
 }
 
+/* Tahun Pendidikan */
 .edu-year {
     font-size: 0.95rem;
     color: #6b7280;
     white-space: nowrap;
 }
 
-@media (max-width: 600px) {
-    .edu-item {
-        flex-direction: column;
-        gap: 4px;
-    }
-}
-
+/* Styling bagian SKILLS */
 
 .skills-section {
     max-width: 1100px;
@@ -259,6 +261,7 @@ h1, .brand {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Judul bagian skill */
 .skills-title {
     color: #d95d39; 
     font-size: 0.95rem;
@@ -267,13 +270,14 @@ h1, .brand {
     margin-bottom: 16px;
 }
 
-
+/* Untuk seluruh elemen berbentuk pills */
 .skills-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px; /* Jarak antar pills */
 }
 
+/* Bentuk kotak pills untuk tiap skill */
 .skill-pill {
     background-color: #f9c4b7;
     color: #b84323;            
@@ -282,13 +286,16 @@ h1, .brand {
     padding: 8px 18px;
     border-radius: 20px;       
     display: inline-block;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; /* Timer saat warna berubah */
 }
 
+/* Perubahan warna saat kursor diarahkan ke atas pills */
 .skill-pill:hover {
     background-color: #d95d39;
     color: #ffffff;
 }
+
+/* Styling section EXPERIENCE */
 
 .experience-section {
     max-width: 1100px;
@@ -298,6 +305,7 @@ h1, .brand {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+/* Judul bagian experience */
 .exp-title {
     color: #d95d39; 
     font-size: 0.95rem;
@@ -306,11 +314,13 @@ h1, .brand {
     margin-bottom: 24px;
 }
 
+/* Tempat garis timeline waktu diletakkan */
 .timeline {
     position: relative;
     padding-left: 0;
 }
 
+/* Menggambar garis vertikal sebagai penghubung antar pengalaman */
 .timeline::before {
     content: '';
     position: absolute;
@@ -321,6 +331,7 @@ h1, .brand {
     background-color: #e5e7eb;
 }
 
+/* Mengatur jarak dan posisi tiap unit pengalaman */
 .timeline-item {
     position: relative;
     padding-left: 28px;
@@ -331,6 +342,7 @@ h1, .brand {
     padding-bottom: 0;
 }
 
+/* Membuat titik lingkaran di sebelah kiri tiap pengalaman */
 .timeline-dot {
     position: absolute;
     left: 0;
@@ -341,10 +353,12 @@ h1, .brand {
     background-color: #f4ae9a;
 }
 
+/* Warna khusus titik lingkaran untuk posisi/peran yang sedang berjalan aktif */
 .timeline-item.active .timeline-dot {
     background-color: #d95d39; 
 }
 
+/* judul posisi pekerjaan/organisasi */
 .timeline-content h3 {
     margin: 0 0 2px 0;
     font-size: 1.05rem;
@@ -352,12 +366,14 @@ h1, .brand {
     color: #111827;
 }
 
+/* nama organisasi dan tahun */
 .exp-meta {
     margin: 0 0 8px 0;
     font-size: 0.9rem;
     color: #434851;
 }
 
+/* daftar poin deskripsi tugas */
 .exp-bullets {
     margin: 0;
     padding-left: 18px;
@@ -374,6 +390,7 @@ h1, .brand {
     margin-bottom: 0;
 }
 
+/*penyesuaian design ketika dibuka di perangkay mobile */
 @media (max-width: 768px) {
     .education-section,
     .skills-section, 
@@ -381,5 +398,10 @@ h1, .brand {
     .contact-section {   
         padding: 0 20px !important;
         margin: 24px auto;
+    }
+
+    .edu-item {
+            flex-direction: column;
+            gap: 4px;
     }
 }
