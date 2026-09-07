@@ -32,7 +32,7 @@ Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%201/chat-no1.jpeg) (ara
 bantuin dan arahkan cara bikin elemennya aja dong
 
 *Hasil dari AI:*
-**Notes: Kode ai hanya berupa contoh implementasi untuk design tersebut, yang saya gunakan di kode tugas saya sudah dimodifikasi sedikit untuk menyesuaikan isi teks dari "skills" dan sedikit penyesuaian lainnya.**
+**Notes: Kode ai hanya berupa contoh implementasi untuk design tersebut, yang saya gunakan di kode tugas saya sudah dimodifikasi sedikit untuk menyesuaikan isi teks dari "skills" dan sedikit penyesuaian lainnya. (warna, ukuran)**
 Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%201/chat-no2.png) (arahkan kursor ke link)
 - Gunakan tag <section> sebagai wadah utama dan daftar <span> di dalam pembungkus Flexbox (.skills-container):
 - Gunakan properti flex-wrap: wrap agar jika daftar keahlian cukup banyak, elemen pill otomatis berpindah ke baris baru tanpa memicu horizontal scrollbar.
