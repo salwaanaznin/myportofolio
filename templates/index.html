@@ -12,9 +12,10 @@
 <body>
     <header class="site-header">
         <div class="container">
-            <a href="#profile" class="brand">{{ name }}</a>
+            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
             <nav>
-                <a href="#profile">Profile</a>
+                <a href="{% url 'main:show_main' %}">Profile</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
             </nav>
         </div>
     </header>
@@ -103,15 +104,15 @@
     </div>
 </section>
 
-<!--Section Experience -->
+<!-- Section Experience
 <section class="experience-section">
-    <!-- Judul utama bagian Pengalaman -->
+    <!-- Judul utama bagian Pengalaman 
     <h2 class="exp-title">EXPERIENCE</h2>
     
-    <!-- Experience yg sedang berjalan sekarang -->
+    <!-- Experience yg sedang berjalan sekarang 
     <div class="timeline">
         <div class="timeline-item active">
-            <!-- Penanda dot di garis waktu -->
+            <!-- Penanda dot di garis waktu 
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <h3>Member of People Operations</h3>
@@ -123,9 +124,9 @@
             </div>
         </div>
 
-        <!-- Section pengalaman yg sudah berlalu -->
+        <!-- Section pengalaman yg sudah berlalu 
         <div class="timeline-item">
-            <!-- Penanda dot di garis waktu -->
+            <!-- Penanda dot di garis waktu 
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <h3>Supermentor</h3>
@@ -136,9 +137,9 @@
             </div>
         </div>
 
-        <!-- Section pengalaman yg sudah berlalu -->
+        <!-- Section pengalaman yg sudah berlalu 
         <div class="timeline-item">
-            <!-- Penanda dot di garis waktu -->
+            <!-- Penanda dot di garis waktu 
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <h3>Mentor</h3>
@@ -149,9 +150,9 @@
             </div>
         </div>
 
-        <!-- Section pengalaman yg sudah berlalu -->
+        <!-- Section pengalaman yg sudah berlalu
         <div class="timeline-item">
-            <!-- Penanda dot di garis waktu -->
+            <!-- Penanda dot di garis waktu 
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <h3>Student Advocacy and Welfare Intern</h3>
@@ -162,9 +163,9 @@
             </div>
         </div>
 
-        <!-- Section pengalaman yg sudah berlalu -->
+        <!-- Section pengalaman yg sudah berlalu 
         <div class="timeline-item">
-            <!-- Penanda dot di garis waktu -->
+            <!-- Penanda dot di garis waktu 
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <h3>Head of Consumption Division</h3>
@@ -175,7 +176,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
     <footer class="site-footer">
         <div class="container">

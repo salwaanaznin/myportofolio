@@ -298,6 +298,60 @@ h1, .brand {
 /* Styling section EXPERIENCE */
 
 .experience-section {
+    padding: 4rem 0;
+    border-top: 1px solid var(--line);
+}
+
+.section-kicker {
+    color: var(--accent-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.experience-section h1 {
+    margin: 0.4rem 0 1.5rem;
+    font-size: 2rem;
+}
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.experience-card {
+    padding: 1.25rem;
+    background-color: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+}
+
+.experience-category {
+    color: var(--accent-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.experience-card h2 {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.experience-description,
+.empty-state {
+    color: var(--text-muted);
+}
+
+.experience-status {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* .experience-section {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 24px 0 60px; 
@@ -305,7 +359,7 @@ h1, .brand {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Judul bagian experience */
+/* Judul bagian experience 
 .exp-title {
     color: #d95d39; 
     font-size: 0.95rem;
@@ -314,13 +368,13 @@ h1, .brand {
     margin-bottom: 24px;
 }
 
-/* Tempat garis timeline waktu diletakkan */
+/* Tempat garis timeline waktu diletakkan 
 .timeline {
     position: relative;
     padding-left: 0;
 }
 
-/* Menggambar garis vertikal sebagai penghubung antar pengalaman */
+/* Menggambar garis vertikal sebagai penghubung antar pengalaman 
 .timeline::before {
     content: '';
     position: absolute;
@@ -331,7 +385,7 @@ h1, .brand {
     background-color: #e5e7eb;
 }
 
-/* Mengatur jarak dan posisi tiap unit pengalaman */
+/* Mengatur jarak dan posisi tiap unit pengalaman 
 .timeline-item {
     position: relative;
     padding-left: 28px;
@@ -342,7 +396,7 @@ h1, .brand {
     padding-bottom: 0;
 }
 
-/* Membuat titik lingkaran di sebelah kiri tiap pengalaman */
+/* Membuat titik lingkaran di sebelah kiri tiap pengalaman 
 .timeline-dot {
     position: absolute;
     left: 0;
@@ -353,12 +407,12 @@ h1, .brand {
     background-color: #f4ae9a;
 }
 
-/* Warna khusus titik lingkaran untuk posisi/peran yang sedang berjalan aktif */
+/* Warna khusus titik lingkaran untuk posisi/peran yang sedang berjalan aktif 
 .timeline-item.active .timeline-dot {
     background-color: #d95d39; 
 }
 
-/* judul posisi pekerjaan/organisasi */
+/* judul posisi pekerjaan/organisasi 
 .timeline-content h3 {
     margin: 0 0 2px 0;
     font-size: 1.05rem;
@@ -366,14 +420,14 @@ h1, .brand {
     color: #111827;
 }
 
-/* nama organisasi dan tahun */
+/* nama organisasi dan tahun 
 .exp-meta {
     margin: 0 0 8px 0;
     font-size: 0.9rem;
     color: #434851;
 }
 
-/* daftar poin deskripsi tugas */
+/* daftar poin deskripsi tugas 
 .exp-bullets {
     margin: 0;
     padding-left: 18px;
@@ -388,7 +442,7 @@ h1, .brand {
 
 .exp-bullets li:last-child {
     margin-bottom: 0;
-}
+} */
 
 /*penyesuaian design ketika dibuka di perangkay mobile */
 @media (max-width: 768px) {
