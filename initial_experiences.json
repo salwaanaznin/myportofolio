@@ -1,0 +1,50 @@
+[
+{
+  "model": "main.experience",
+  "pk": "23a9e8c9-814e-46dc-a912-1f8558cc21cc",
+  "fields": {
+    "title": "Member of People Operations",
+    "description": "MDrive member engagement through the end-to-end planning and execution of organizational bonding events and internal development programs.",
+    "category": "RISTEK 2026",
+    "thumbnail": null,
+    "started_at": "2026-09-09T14:31:26.898Z",
+    "ended_at": null
+  }
+},
+{
+  "model": "main.experience",
+  "pk": "397e94f8-5e71-4cc4-bf9d-c25fbb624e83",
+  "fields": {
+    "title": "Supermentor",
+    "description": " DDP0 mentors to ensure all activities were well-organized and aligned with the program's core objectives.",
+    "category": "Programming Foundation 0 (DDP-0)",
+    "thumbnail": null,
+    "started_at": "2026-09-09T14:31:26.946Z",
+    "ended_at": "2026-09-09T14:34:04.195Z"
+  }
+},
+{
+  "model": "main.experience",
+  "pk": "d75f533e-8949-4fb9-93ea-35f2d683b04d",
+  "fields": {
+    "title": "Mentor",
+    "description": "intensive academic mentorship for high school students, providing strategic guidance on university entrance exam preparations and curriculum navigation to achieve PTN admissions.",
+    "category": "BETIS Fasilkom UI",
+    "thumbnail": null,
+    "started_at": "2026-09-09T14:31:26.957Z",
+    "ended_at": "2026-09-09T14:34:04.195Z"
+  }
+},
+{
+  "model": "main.experience",
+  "pk": "f7325312-ec1d-4247-83c9-593a638aeaf5",
+  "fields": {
+    "title": "Student Advocacy and Welfare Intern",
+    "description": "Actively engaged in identifying and analyzing student welfare issues, proposing data-driven solutions to improve student life quality.",
+    "category": "BEM Fasilkom UI",
+    "thumbnail": null,
+    "started_at": "2026-09-09T14:31:29.986Z",
+    "ended_at": "2026-09-09T14:34:04.195Z"
+  }
+}
+]
