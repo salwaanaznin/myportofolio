@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from datetime import datetime
+from django.utils import timezone
 
 class Experience(models.Model):
     EXPERIENCE_CHOICES = [

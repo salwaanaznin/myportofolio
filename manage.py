@@ -2,6 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from django.utils import timezone
+import datetime
 
 
 def main():
@@ -23,6 +25,7 @@ if __name__ == '__main__':
 
 from datetime import date
 import datetime
+from django.utils import timezone
 from main.models import Experience
 
 Experience.objects.create(

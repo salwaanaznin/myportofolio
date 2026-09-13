@@ -1,0 +1,3 @@
+[33m710f1a2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m feat:4- Configure URL routing and link cross-page navigation
+[33m9cc337f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m feat-3: add URL routing for education page
+[33m4268256[m feat-2: add education model, view, and template
