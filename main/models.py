@@ -30,15 +30,15 @@ from django.db import models
 
 class Education(models.Model):
     EDUCATION_CHOICES = [
-        ('Senior High School', 'Natural Science'),
-        ('Undergraduate Information System', 'Faculty of Computer Science, Universitas Indonesia'),
+        ('SMA', 'Senior High School'),
+        ('S1', 'Undergraduate Student'),
     ]
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     description = models.TextField()
     major = models.CharField(max_length=255, blank=True, null=True)
-    degree = models.CharField(max_length=20, choices=EDUCATION_CHOICES, default='S1')
+    degree = models.CharField(max_length=50, choices=EDUCATION_CHOICES, default='S1')
     thumbnail = models.URLField(blank=True, null=True)
     started_at = models.DateTimeField()
     ended_at = models.DateTimeField(blank=True, null=True)
