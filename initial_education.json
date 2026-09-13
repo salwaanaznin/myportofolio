@@ -1,0 +1,28 @@
+[
+{
+  "model": "main.education",
+  "pk": "8077c561-c3d4-4c28-a727-2f4695cc316c",
+  "fields": {
+    "title": "Universitas Indonesia",
+    "description": "Combining core software development skills with system analysis and IT project management at Fasilkom UI. Focused on building scalable digital solutions and understanding the strategic role of technology in organizations.",
+    "major": "Information System",
+    "degree": "S1",
+    "thumbnail": "https://images.seeklogo.com/logo-png/35/1/universitas-indonesia-logo-png_seeklogo-355692.png",
+    "started_at": "2025-08-01T00:00:00Z",
+    "ended_at": null
+  }
+},
+{
+  "model": "main.education",
+  "pk": "d8fcac7f-20fe-4274-be54-1a2a42cb8511",
+  "fields": {
+    "title": "Nurul Fikri Islamic School",
+    "description": "Completed high school with a focus on Natural Sciences. Developed analytical thinking and problem-solving skills through intensive coursework in advanced mathematics and physical sciences",
+    "major": "Natural Science",
+    "degree": "Senior High School",
+    "thumbnail": "https://tse1.mm.bing.net/th/id/OIP.2KrNiQprylOWQH2ZMlQ9GwHaHa?r=0&pid=Api&P=0&h=180",
+    "started_at": "2022-07-01T00:00:00Z",
+    "ended_at": "2025-06-20T00:00:00Z"
+  }
+}
+]
