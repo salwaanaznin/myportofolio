@@ -47,3 +47,53 @@ Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%201/chat-no2.png) (arah
 Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%201/chat-no3.jpeg) (arahkan kursor ke link)
 - menggunakan position: relative pada container utama dan position: absolute untuk menggambar garis serta titiknya secara tepat.
 - Membedakan warna .timeline-dot pada peran aktif (#d95d39) dan peran lampau (#f4a28c) memberikan scannability yang baik bagi perekrut/pengunjung untuk langsung mengenali posisi kamu saat ini secara cepat.
+
+
+
+### Tugas 2
+
+*1. Alur Permintaan di Django*
+- Browser mengirimkan permintaan HTTP ke server Django.
+- Permintaan pertama kali diterima oleh urls.py tingkat proyek (myportofolio/urls.py), yang bertugas mencocokkan pola URL utama dan mengarahkan (routing) ke urls.py aplikasi (main/urls.py).
+- Berkas urls.py di dalam aplikasi main mencocokkan sisa pola URL dan menentukan fungsi view spesifik yang akan dipanggil.
+- Fungsi atau kelas view menerima permintaan tersebut. View bertindak sebagai otak pengolah data dan berinteraksi dengan Model untuk mengambil atau memanipulasi data
+- Model merepresentasi struktur tabel database. Model mengambil data yang diminta oleh view dari database.
+- Setelah data didapatkan oleh view, data tersebut dikemas ke dalam sebuah context dan dikirim ke Template. Template bertugas merender data tersebut menjadi tampilan visual yang rapi.
+- Django mengirimkan hasil HTML akhir kembali ke browser pengguna untuk ditampilkan.
+
+*2. Alasan Data Disimpan pada Model, Bukan Ditulis Langsung di Template*
+Data portofolio yang dibuat sebaiknya disimpan dalam model karena alasan kemudahan pemeliharaan. Jika data ditulis langsung di template, setiap kali ada penambahan riwayat kerja atau pendidikan baru, kita harus membuka dan mengubah kode HTML secara manual. Dengan model, data dapat dikelola secara dinamis melalui halaman Django Admin tanpa menyentuh kode program sama sekali.
+
+*3. Perbedaan makemigrations dan migrate*I
+- **Makemigrations** berfungsi untuk mencatat atau membuat draf file migrasi baru berdasarkan perubahan apa saja yang kamu lakukan pada file models.py. Perintah ini sebenernya belum menyentuh atau mengubah struktur database langsung.
+- **Migrate** berfungsi untuk mengeksekusi file migrasi yang telah dibuat sebelumnya ke dalam database fisik sehingga tabel di database benar-benar terbentuk atau diperbarui sesuai model.
+
+
+***Log Prompting Penggunaan AI**
+Saya menggunakan Gemini AI sebagai tools pembantu untuk beberapa bagian spesifik berikut terkait pengerjaan Tugas 2.
+### 1. Diskusi pembuatan main models untuk section Education
+*Prompt:*
+- buat nambahin main models di views ini buat education harus bikin file baru apa bs lanjut dr sini??
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%202/no-1.jpeg) (arahkan kursor ke link)
+- Bisa langsung dilanjutkan di file main/views.py yang sama tanpa perlu membuat file baru
+- Tinggal import model Education dan tambahkan fungsi view baru untuk menangani halaman education
+
+
+### 2. Memperbaiki kode HTML untuk education
+*Prompt:* 
+- eh tolong highlight mana aja yg hrs diubah untuk mencapai itu dr kode education yg aku kasih
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%202/no-2.jpeg) (arahkan kursor ke link)
+
+
+### 3. CSS bermasalah dan konsistensi ukuran logo/gambar yang diletakkan di section education
+*Prompt:*
+- ini gak kena design css ya.. terus ini size logo nya beda beda antara high school sama univ
+
+*Hasil dari AI:*  
+**Notes: Hasil ai hanya berupa contoh implementasi kode untuk design tersebut, yang saya gunakan di kode tugas saya sudah dimodifikasi sedikit untuk menyesuaikan isi dari html dan sedikit penyesuaian lainnya.**
+Screenshoot chat bisa diakses ![disini](Log%20AI%20Tugas%202/no-3.jpeg) (arahkan kursor ke link)
+- Ternyata CSS belum terhubung dengan template HTML yang saya buat
+- Perombakan width, height, object
