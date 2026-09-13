@@ -10,7 +10,7 @@ def show_main(request):
         "npm": "2506622802",
         "study_program": "S1 Sistem Informasi",
         "bio": (
-            "find me at midnight"
+            "Currently navigating my tech journey as a university student, passionate about software engineering, problem-solving, and technology. Beyond coding, I am committed to supporting diversity in STEM and building space for women to thrive in technology."
         ),
     }
     return render(request, "index.html", context)
@@ -18,7 +18,7 @@ def show_main(request):
 
 def show_experience(request):
     context = {
-        "name": "Salwa",
+        "name": "Salwa's portofolio",
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
@@ -27,7 +27,7 @@ def show_experience(request):
 
 def show_education(request):
     context = {
-        "name": "Salwa",
+        "name": "Salwa's portofolio",
         "education_list": Education.objects.all(),
     }
     return render(request, "education.html", context)

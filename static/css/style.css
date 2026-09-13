@@ -31,10 +31,47 @@ h1, .brand {
     padding: 0 1.5rem;
 }
 
+/* HEADER & NAVIGATION PILL CONTAINER (Membulat sesuai ilustrasi) */
 .site-header {
-    border-bottom: 1px solid var(--line);
+    background-color: #fff3e0; /* Warna krem/orange lembut */
+    border: 3px solid #fa6940;   /* Garis pinggir orange */
+    border-radius: 1000px;      /* Membuat bentuk membulat/capsule */
+    padding: 0.35rem 1.70rem;
+    margin: 1.5rem auto;
+    max-width: 90%;             /* Agar mengambang rapi di tengah */
+    box-shadow: 0 4px 12px rgba(255, 183, 77, 0.15);
 }
 
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-header .brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    text-decoration: none;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.site-header nav a {
+    text-decoration: none;
+    color: #374151;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.site-header nav a:hover {
+    color: #e65100;
+}
 .site-header .container {
     display: flex;
     justify-content: space-between;
@@ -194,61 +231,180 @@ h1, .brand {
     }
 }
 
-/* Styling section EDUCATION*/
-
+/*EDUCATION SECTION STYLING*/
 
 .education-section {
-    max-width: 1100px;
-    margin: 40px auto; /* Mengatur posisi bagian agar berada di tengah layar */
-    padding: 0 24px 0 60px; 
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: 3rem 0;
 }
 
-/* Judul bagian pendidikan */
-.edu-title {
-    color: #d95d39; 
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-}
-
-/* Garis tipis pemisah antar kategori */
-.edu-divider {
-    height: 1px;
-    background-color: #e5e7eb; 
-    width: 100%;
-}
-
-/* Garis tipis pemisah antar item */
-.edu-item {
-    display: flex; /* Mengatur posisi teks nama tempat dan tahun agar sejajar */
-    justify-content: space-between; /* Memberi jarak otomatis ke ujung kiri dan kanan */
-    align-items: flex-start;
-    padding: 16px 0;
-}
-
-/* Judul tempat pendidikan */
-.edu-info h3 {
-    margin: 0 0 4px 0;
-    font-size: 1.05rem;
+.section-kicker {
+    font-size: 0.9rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+/* Grid Layout */
+.education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Card Container */
+.education-card {
+    border: 2px solid #ffc5b5;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.education-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Wrapper logo agar kotak pembungkusnya berukuran sama persis */
+.education-logo-wrapper {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+/* Gambar di dalam wrapper agar proporsional dan tidak gepeng */
+.education-logo-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Category Badge (Degree) */
+.education-category {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.25rem 0.75rem;
+    background-color: #f3f4f6;
+    color: #374151;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
+}
+
+/* Title & Major */
+.education-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
+}
+
+.education-card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #4b5563;
+    margin: 0 0 0.75rem 0;
+}
+
+/* Description */
+.education-description {
+    font-size: 0.925rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex-grow: 1; /* Mendorong status ke bagian paling bawah kartu */
+}
+
+/* Status Indicator */
+.education-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+    margin-top: auto;
+}
+
+/* Status Colors */
+.education-card .education-status {
+    background-color: #e0f2fe;
+    color: #d95d39; 
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    grid-column: 1 / -1;
+    padding: 3rem 1rem;
+    color: #9ca3af;
+    font-style: italic;
+    background-color: #f9fafb;
+    border: 2px dashed #e5e7eb;
+    border-radius: 12px;
+}
+
+.education-status.status-ongoing {
+    background-color: #dbeafe;
+    color: #d95d39;
+}
+
+.education-status.status-completed {
+    background-color: #dcfce7;
+    color: #f9c4b7;
+}
+
+/* NAVBAR CONTAINER*/
+.custom-navbar {
+    background-color: #faf6f0; 
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #efe6da;
+}
+
+/* BRAND NAME (Sebelah Kiri) */
+.nav-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
     color: #111827;
 }
 
-/* Penjelasan tempat pendidikan */
-.edu-info p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #6b7280;
+/* MENU LINKS (Sebelah Kanan) */
+.nav-menu {
+    display: flex;
+    gap: 2rem;
 }
 
-/* Tahun Pendidikan */
-.edu-year {
+.nav-item {
+    text-decoration: none;
+    color: #374151;
     font-size: 0.95rem;
-    color: #6b7280;
-    white-space: nowrap;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #000000;
+    font-weight: 600;
 }
 
 /* Styling bagian SKILLS */
@@ -297,152 +453,118 @@ h1, .brand {
 
 /* Styling section EXPERIENCE */
 
+/* EXPERIENCE SECTION STYLING (Identik dengan Education) */
 .experience-section {
-    padding: 4rem 0;
-    border-top: 1px solid var(--line);
-}
-
-.section-kicker {
-    color: var(--accent-dark);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-}
-
-.experience-section h1 {
-    margin: 0.4rem 0 1.5rem;
-    font-size: 2rem;
+    padding: 3rem 0;
 }
 
 .experience-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .experience-card {
-    padding: 1.25rem;
-    background-color: #fff;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border: 2px solid #ffc5b5;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo Wrapper Experience (64x64px) */
+.experience-logo-wrapper {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.experience-logo-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .experience-category {
-    color: var(--accent-dark);
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.25rem 0.75rem;
+    background-color: #f3f4f6;
+    color: #374151;
     font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 9999px;
+    margin-bottom: 0.75rem;
 }
 
 .experience-card h2 {
-    margin: 0.5rem 0;
     font-size: 1.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 0.25rem 0;
 }
 
-.experience-description,
-.empty-state {
-    color: var(--text-muted);
+.experience-description {
+    font-size: 0.925rem;
+    color: #6b7280;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
 .experience-status {
-    margin-top: 1rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+    margin-top: auto;
 }
 
-/* .experience-section {
-    max-width: 1100px;
-    margin: 40px auto;
-    padding: 0 24px 0 60px; 
-    box-sizing: border-box;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+.experience-status.status-ongoing {
+    background-color: #dbeafe;
+    color: #d95d39;
 }
 
-/* Judul bagian experience 
-.exp-title {
-    color: #d95d39; 
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 24px;
+.experience-status.status-completed {
+    background-color: #dcfce7;
+    color: #f9c4b7;
 }
 
-/* Tempat garis timeline waktu diletakkan 
-.timeline {
-    position: relative;
-    padding-left: 0;
+/* Efek animasi kecil di samping judul */
+@keyframes bounce-rotate {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-6px) rotate(12deg);
+    }
 }
 
-/* Menggambar garis vertikal sebagai penghubung antar pengalaman 
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 5px;
-    top: 6px;
-    bottom: 24px;
-    width: 1px;
-    background-color: #e5e7eb;
+.anim-icon {
+    display: inline-block;
+    animation: bounce-rotate 2s ease-in-out infinite;
+    margin-left: 8px;
 }
-
-/* Mengatur jarak dan posisi tiap unit pengalaman 
-.timeline-item {
-    position: relative;
-    padding-left: 28px;
-    padding-bottom: 24px;
-}
-
-.timeline-item:last-child {
-    padding-bottom: 0;
-}
-
-/* Membuat titik lingkaran di sebelah kiri tiap pengalaman 
-.timeline-dot {
-    position: absolute;
-    left: 0;
-    top: 4px;
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background-color: #f4ae9a;
-}
-
-/* Warna khusus titik lingkaran untuk posisi/peran yang sedang berjalan aktif 
-.timeline-item.active .timeline-dot {
-    background-color: #d95d39; 
-}
-
-/* judul posisi pekerjaan/organisasi 
-.timeline-content h3 {
-    margin: 0 0 2px 0;
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #111827;
-}
-
-/* nama organisasi dan tahun 
-.exp-meta {
-    margin: 0 0 8px 0;
-    font-size: 0.9rem;
-    color: #434851;
-}
-
-/* daftar poin deskripsi tugas 
-.exp-bullets {
-    margin: 0;
-    padding-left: 18px;
-    color: #374151;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-.exp-bullets li {
-    margin-bottom: 4px;
-}
-
-.exp-bullets li:last-child {
-    margin-bottom: 0;
-} */
 
 /*penyesuaian design ketika dibuka di perangkay mobile */
 @media (max-width: 768px) {

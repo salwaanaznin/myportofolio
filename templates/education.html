@@ -1,32 +1,73 @@
-<main>
-    <section class="education-section" id="education">
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - {{ name }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="site-header">
         <div class="container">
-            <p class="section-kicker">Education is a key to success</p>
-            <h1>Education</h1>
-
-            <div class="education-grid">
-                {% for experience in education %}
-                    <article class="education-card">
-                        <span class="education-category">
-                            {{ education.get_category_display }}
-                        </span>
-                        <h2>{{ education.title }}</h2>
-                        <p class="education-description">
-                            {{ education.description }}
-                        </p>
-
-                        {% if experience.is_ongoing %}
-                            <p class="education-status">Sedang berlangsung</p>
-                        {% else %}
-                            <p class="education-status">Selesai</p>
-                        {% endif %}
-                    </article>
-                {% empty %}
-                    <p class="empty-state">
-                        Belum ada edukasi yang ditambahkan.
-                    </p>
-                {% endfor %}
-            </div>
+            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
+            <nav>
+                <a href="{% url 'main:show_main' %}">Profile</a>
+                <a href="{% url 'main:show_experience' %}">Experience</a>
+                <a href="{% url 'main:show_education' %}">Education</a>
+            </nav>
         </div>
-    </section>
-</main>
+    </header>
+
+    <main>
+        <section class="education-section" id="education">
+            <div class="container">
+                <p class="section-kicker">Education is a key to success</p>
+                <h1>Education <span class="anim-icon">🎓</span></h1>
+
+                <div class="education-grid">
+                    {% for edu in education_list %}
+                        <article class="education-card">
+                            {% if edu.thumbnail %}
+                                <div class="education-logo-wrapper">
+                                    <img src="{{ edu.thumbnail }}" alt="{{ edu.title }} Logo">
+                                </div>
+                            {% endif %}
+
+                            <h2>{{ edu.title }}</h2>
+
+                            <!-- DEGREE & MAJOR -->
+                            <span class="education-category">
+                                {{ edu.degree }} - {{ edu.major }}
+                            </span>
+
+                            <p class="education-description">
+                                {{ edu.description }}
+                            </p>
+
+                            {% if edu.ended_at == None %}
+                                <p class="education-status status-ongoing">Sedang berlangsung</p>
+                            {% else %}
+                                <p class="education-status status-completed">Selesai (2022 - 2025)</p>
+                            {% endif %}
+                        </article>
+                    {% empty %}
+                        <p class="empty-state">
+                            Belum ada data edukasi.
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+        </div>
+    </footer>
+</body>
+</html>

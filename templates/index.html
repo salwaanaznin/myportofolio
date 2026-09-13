@@ -16,6 +16,8 @@
             <nav>
                 <a href="{% url 'main:show_main' %}">Profile</a>
                 <a href="{% url 'main:show_experience' %}">Experience</a>
+                <!-- Tambahkan untuk section education -->
+            <a href="{% url 'main:show_education' %}">Education</a>
             </nav>
         </div>
     </header>
@@ -29,7 +31,7 @@
                 </div>
                 <div class="hero-photo">
                     <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/salwa.png" alt="Photo of {{ name }}">
+                    <img class="avatar" src="/static/img/salwa-profile.png" alt="Photo of {{ name }}">
                 </div>
                 <div class="hero-details">
                     <p class="bio">{{ bio }}</p>
@@ -53,39 +55,6 @@
         </section>
     </main>
 
-<!-- Section riwayat pendidikan formal secara terstruktur. -->
-<section class="education-section">
-    <!-- Judul utama bagian Pendidikan -->
-    <h2 class="edu-title">EDUCATION</h2>
-    <div class="edu-divider"></div>
-    
-    <div class="edu-item">
-        <div class="edu-info">
-            <!-- Pendidikan ketika kuliah -->
-            <h3>Undergraduate Information System</h3>
-            <p>Faculty of Computer Science, Universitas Indonesia</p>
-        </div>
-        <!-- Waktu studi di kuliah -->
-        <div class="edu-year">
-            2025 - now
-        </div>
-    </div>
-    
-    <div class="edu-divider"></div>
-    
-    <div class="edu-item">
-        <div class="edu-info">
-            <!-- Pendidikan ketika SMA -->
-            <h3>Senior High School - Natural Science</h3>
-            <p>SMA Islam Nurul Fikri</p>
-        </div>
-        <!-- Waktu studi di SMA -->
-        <div class="edu-year">
-            2022 - 2025
-        </div>
-    </div>
-    <div class="edu-divider"></div>
-</section>
 
 <!--Section Skills -->
 <section class="skills-section">
@@ -103,80 +72,6 @@
         <span class="skill-pill">Teamwork</span>
     </div>
 </section>
-
-<!-- Section Experience
-<section class="experience-section">
-    <!-- Judul utama bagian Pengalaman 
-    <h2 class="exp-title">EXPERIENCE</h2>
-    
-    <!-- Experience yg sedang berjalan sekarang 
-    <div class="timeline">
-        <div class="timeline-item active">
-            <!-- Penanda dot di garis waktu 
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Member of People Operations</h3>
-                <p class="exp-meta">RISTEK Fasilkom UI &middot; 2026</p>
-                <ul class="exp-bullets">
-                    <li>Drive member engagement through the end-to-end planning and execution of organizational bonding events and internal development programs.</li>
-                    <li>Manage cross-functional operations, including internal scheduling, and coordination to support team efficiency.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Section pengalaman yg sudah berlalu 
-        <div class="timeline-item">
-            <!-- Penanda dot di garis waktu 
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Supermentor</h3>
-                <p class="exp-meta">Programming Foundation 0 (DDP0) &middot; 2026</p>
-                <ul class="exp-bullets">
-                    <li><strong>Supervised </strong> DDP0 mentors to ensure all activities were well-organized and aligned with the program's core objectives.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Section pengalaman yg sudah berlalu 
-        <div class="timeline-item">
-            <!-- Penanda dot di garis waktu 
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Mentor</h3>
-                <p class="exp-meta">BETIS Fasilkom UI &middot; 2026</p>
-                <ul class="exp-bullets">
-                    <li>Facilitated <strong>intensive academic mentorship</strong> for high school students, providing strategic guidance on university entrance exam preparations and curriculum navigation to achieve PTN admissions.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Section pengalaman yg sudah berlalu
-        <div class="timeline-item">
-            <!-- Penanda dot di garis waktu 
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Student Advocacy and Welfare Intern</h3>
-                <p class="exp-meta">Sekolah BEM Fasilkom UI &middot; 2025</p>
-                <ul class="exp-bullets">
-                    <li>Actively engaged in identifying and analyzing student welfare issues, proposing data-driven solutions to improve <strong>student life quality</strong>.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- Section pengalaman yg sudah berlalu 
-        <div class="timeline-item">
-            <!-- Penanda dot di garis waktu 
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-                <h3>Head of Consumption Division</h3>
-                <p class="exp-meta">FLIGHT G21 &middot; 2024 - 2025</p>
-                <ul class="exp-bullets">
-                    <li>Led and oversaw the logistical distribution of consumption for over <strong>1000 participants</strong> and committee members, ensuring the timely provision of food and beverages according to hygiene standards throughout the event.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section> -->
 
     <footer class="site-footer">
         <div class="container">
