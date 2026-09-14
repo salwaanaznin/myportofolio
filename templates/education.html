@@ -41,7 +41,7 @@
 
                             <!-- DEGREE & MAJOR -->
                             <span class="education-category">
-                                {{ edu.degree }} - {{ edu.major }}
+                                {{ edu.get_degree_display }} - {{ edu.major }}
                             </span>
 
                             <p class="education-description">
@@ -49,9 +49,13 @@
                             </p>
 
                             {% if edu.ended_at == None %}
-                                <p class="education-status status-ongoing">Sedang berlangsung</p>
+                                <p class="education-status status-ongoing">
+                                    Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
+                                </p>
                             {% else %}
-                                <p class="education-status status-completed">Selesai (2022 - 2025)</p>
+                                <p class="education-status status-completed">
+                                    Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
+                                </p>
                             {% endif %}
                         </article>
                     {% empty %}

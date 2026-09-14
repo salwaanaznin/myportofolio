@@ -6,6 +6,7 @@ from main.models import Experience, Education
 
 class MainTest(TestCase):
     def setUp(self):
+        Experience.objects.all().delete()
         self.experience = Experience.objects.create(
             title="Asisten Dosen PBP",
             description="Membantu mahasiswa memahami pengembangan web.",
@@ -56,9 +57,16 @@ class MainTest(TestCase):
         self.assertContains(response, "Selesai")
         self.assertNotContains(response, "Sedang berlangsung")
 
-class MainTest(TestCase):
+class EducationTest(TestCase):
     def setUp(self):
         self.client = Client()
+        self.education = Education.objects.create(
+            title="SMA Negeri 1 Jakarta",
+            description="Menempuh pendidikan menengah atas.",
+            major="IPA",
+            degree="SMA",
+            started_at=timezone.now(),
+        )
 
     def test_url_and_template_accessibility(self):
         """Test apakah URL utama, experience, dan education dapat diakses dan menggunakan template yang tepat"""
@@ -74,27 +82,20 @@ class MainTest(TestCase):
         self.assertEqual(response_edu.status_code, 200)
         self.assertTemplateUsed(response_edu, 'education.html')
 
-    def test_experience_page(self):
-        """Test apakah halaman experience merender kategori dengan benar"""
-        response = self.client.get(reverse('main:show_experience'))
-        self.assertEqual(response.status_code, 200)
-        # Menyesuaikan dengan string lowercase di HTML
-        self.assertContains(response, "volunteer")
+    def test_education_data_appears(self):
+        """Data Education muncul di halaman saat ada data"""
+        response = self.client.get(reverse('main:show_education'))
+        self.assertContains(response, self.education.title)
+        self.assertContains(response, self.education.description)
+        self.assertContains(response, "SMA")
 
-    def test_completed_experience(self):
-        """Test status experience"""
-        response = self.client.get(reverse('main:show_experience'))
-        self.assertEqual(response.status_code, 200)
-        # Karena data bawaanmu menampilkan 'Sedang berlangsung', kita pastikan teks itu memang ada/muncul di halaman
+    def test_education_ongoing_status(self):
+        self.assertTrue(self.education.is_ongoing)
+        response = self.client.get(reverse('main:show_education'))
         self.assertContains(response, "Sedang berlangsung")
 
-    def test_empty_state_message_displayed(self):
-        """Test pesan kosong ketika data dihapus"""
-        Experience.objects.all().delete()
+    def test_education_empty_state(self):
+        """Pesan kosong muncul saat data dihapus"""
         Education.objects.all().delete()
-
-        response_exp = self.client.get(reverse('main:show_experience'))
-        self.assertEqual(response_exp.status_code, 200)
-        
-        response_edu = self.client.get(reverse('main:show_education'))
-        self.assertEqual(response_edu.status_code, 200)
+        response = self.client.get(reverse('main:show_education'))
+        self.assertContains(response, "Belum ada data edukasi.")

@@ -41,7 +41,7 @@
                             <h2>{{ experience.title }}</h2>
 
                             <span class="experience-category">
-                                {{ experience.category }}
+                                {{ experience.get_category_display }}
                             </span>
 
                             <p class="experience-description">
@@ -49,9 +49,13 @@
                             </p>
 
                             {% if experience.is_ongoing %}
-                                <p class="experience-status status-ongoing">Sedang berlangsung</p>
+                                <p class="experience-status status-ongoing">
+                                    Sedang berlangsung ({{ experience.started_at|date:"Y" }} - sekarang)
+                                </p>
                             {% else %}
-                                <p class="experience-status status-completed">Selesai</p>
+                                <p class="experience-status status-completed">
+                                    Selesai ({{ experience.started_at|date:"Y" }} - {{ experience.ended_at|date:"Y" }})
+                                </p>
                             {% endif %}
                         </article>
                     {% empty %}
