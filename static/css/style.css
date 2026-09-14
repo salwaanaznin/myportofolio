@@ -42,12 +42,6 @@ h1, .brand {
     box-shadow: 0 4px 12px rgba(255, 183, 77, 0.15);
 }
 
-.site-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .site-header .brand {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.25rem;
@@ -577,12 +571,10 @@ h1, .brand {
     }
 
     .edu-item {
-            flex-direction: column;
-            gap: 4px;
+        flex-direction: column;
+        gap: 4px;
     }
-}
 
-@media (max-width: 768px) {
     .site-header {
         padding: 12px 0;
         margin-bottom: 0; 
