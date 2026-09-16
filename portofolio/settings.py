@@ -137,4 +137,4 @@ MAILERS = {
     },
 }
 
-CSRF_TRUSTED_ORIGINS = ["https://salwa-alyani-myportofolio.pws.cs.ui.ac.id/"]
+CSRF_TRUSTED_ORIGINS = ["https://salwa-alyani-myportofolio.pws.cs.ui.ac.id"]
