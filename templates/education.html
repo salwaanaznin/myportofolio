@@ -1,27 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends "base.html" %}
+{% block meta %}
     <title>Education - {{ name }}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    <header class="site-header">
-        <div class="container">
-            <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
-            <nav>
-                <a href="{% url 'main:show_main' %}">Profile</a>
-                <a href="{% url 'main:show_experience' %}">Experience</a>
-                <a href="{% url 'main:show_education' %}">Education</a>
-            </nav>
-        </div>
-    </header>
+{% endblock meta %}
 
+{% block content %}
     <main>
         <section class="education-section" id="education">
             <div class="container">
@@ -41,22 +23,30 @@
 
                             <!-- DEGREE & MAJOR -->
                             <span class="education-category">
-                                {{ edu.get_degree_display }} - {{ edu.major }}
+                                {{ edu.get_degree_display }} {% if edu.major %} - {{ edu.major }}{% endif %}
                             </span>
 
                             <p class="education-description">
                                 {{ edu.description }}
                             </p>
 
-                            {% if edu.ended_at == None %}
-                                <p class="education-status status-ongoing">
-                                    Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
-                                </p>
+                    {% if edu.ended_at %}
+                        <p class="education-status status-completed">
+                            {% if edu.started_at %}
+                                Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
                             {% else %}
-                                <p class="education-status status-completed">
-                                    Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
-                                </p>
+                                Selesai pada {{ edu.ended_at|date:"Y" }}
                             {% endif %}
+                        </p>
+                    {% elif edu.started_at %}
+                        <p class="education-status status-ongoing">
+                            Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
+                        </p>
+                    {% else %}
+                        <p class="education-status">
+                            Periode pendidikan belum dicantumkan.
+                        </p>
+                    {% endif %}
                         </article>
                     {% empty %}
                         <p class="empty-state">
@@ -67,11 +57,4 @@
             </div>
         </section>
     </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 {{ name }}. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
-        </div>
-    </footer>
-</body>
-</html>
+{% endblock content %}
