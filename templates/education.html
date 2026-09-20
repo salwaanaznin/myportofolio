@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% block meta %}
     <title>Education - {{ name }}</title>
 {% endblock meta %}
@@ -8,7 +9,22 @@
         <section class="education-section" id="education">
             <div class="container">
                 <p class="section-kicker">Education is a key to success</p>
-                <h1>Education <span class="anim-icon">🎓</span></h1>
+
+                <div class="project-header">
+                    <h1>Education <span class="anim-icon">🎓</span></h1>
+                    <a href="{% url 'main:create_education' %}"
+                       class="button project-add-button">
+                        <span aria-hidden="true">+</span>
+                        Tambah Pendidikan
+                    </a>
+                </div>
+
+                <p>
+                    <a href="{% url 'main:get_education_json' %}"
+                       class="button button-secondary">
+                        Lihat JSON
+                    </a>
+                </p>
 
                 <div class="education-grid">
                     {% for edu in education_list %}
@@ -21,32 +37,46 @@
 
                             <h2>{{ edu.title }}</h2>
 
-                            <!-- DEGREE & MAJOR -->
                             <span class="education-category">
-                                {{ edu.get_degree_display }} {% if edu.major %} - {{ edu.major }}{% endif %}
+                                {{ edu.get_degree_display }}{% if edu.major %} - {{ edu.major }}{% endif %}
                             </span>
 
                             <p class="education-description">
                                 {{ edu.description }}
                             </p>
 
-                    {% if edu.ended_at %}
-                        <p class="education-status status-completed">
-                            {% if edu.started_at %}
-                                Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
+                            {% if edu.ended_at %}
+                                <p class="education-status status-completed">
+                                    {% if edu.started_at %}
+                                        Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
+                                    {% else %}
+                                        Selesai pada {{ edu.ended_at|date:"Y" }}
+                                    {% endif %}
+                                </p>
+                            {% elif edu.started_at %}
+                                <p class="education-status status-ongoing">
+                                    Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
+                                </p>
                             {% else %}
-                                Selesai pada {{ edu.ended_at|date:"Y" }}
+                                <p class="education-status">
+                                    Periode pendidikan belum dicantumkan.
+                                </p>
                             {% endif %}
-                        </p>
-                    {% elif edu.started_at %}
-                        <p class="education-status status-ongoing">
-                            Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
-                        </p>
-                    {% else %}
-                        <p class="education-status">
-                            Periode pendidikan belum dicantumkan.
-                        </p>
-                    {% endif %}
+
+                            <div class="project-card-actions">
+                                <div class="project-actions">
+                                    <a href="{% url 'main:update_education' edu.id %}"
+                                       class="button"
+                                       aria-label="Edit {{ edu.title }}">
+                                        Edit
+                                    </a>
+                                    <a href="{% url 'main:delete_education' edu.id %}"
+                                       class="button button-danger"
+                                       aria-label="Hapus {{ edu.title }}">
+                                        Hapus
+                                    </a>
+                                </div>
+                            </div>
                         </article>
                     {% empty %}
                         <p class="empty-state">
