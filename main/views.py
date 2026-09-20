@@ -33,9 +33,15 @@ def show_experience(request):
 #education
 
 def get_education_json(request):
+    title_query = request.GET.get("title", "").strip()
     education = Education.objects.all()
+
+    if title_query:
+        education = education.filter(title__icontains=title_query)
+
     education_json = serializers.serialize("json", education)
     return HttpResponse(education_json, content_type="application/json")
+
 
 def show_education(request):
     json_response = get_education_json(request)
@@ -44,9 +50,12 @@ def show_education(request):
         json_response.content.decode("utf-8"),
     )
     education_list = [entry.object for entry in education]
+    title_query = request.GET.get("title", "").strip()
+
     context = {
         "name": "Salwa's portofolio",
         "education_list": education_list,
+        "title_query": title_query,
     }
     return render(request, "education.html", context)
 

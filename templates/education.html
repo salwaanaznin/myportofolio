@@ -18,13 +18,17 @@
                         Tambah Pendidikan
                     </a>
                 </div>
-
-                <p>
-                    <a href="{% url 'main:get_education_json' %}"
-                       class="button button-secondary">
-                        Lihat JSON
-                    </a>
-                </p>
+                <form method="get"
+                    action="{% url 'main:show_education' %}"
+                    class="project-search">
+                    <input type="search"
+                        name="title"
+                        value="{{ title_query }}"
+                        placeholder="Cari berdasarkan nama institusi"
+                        class="project-search__input"
+                        aria-label="Cari berdasarkan nama institusi">
+                    <button type="submit" class="button">Cari</button>
+                </form>
 
                 <div class="education-grid">
                     {% for edu in education_list %}
@@ -45,24 +49,6 @@
                                 {{ edu.description }}
                             </p>
 
-                            {% if edu.ended_at %}
-                                <p class="education-status status-completed">
-                                    {% if edu.started_at %}
-                                        Selesai ({{ edu.started_at|date:"Y" }} - {{ edu.ended_at|date:"Y" }})
-                                    {% else %}
-                                        Selesai pada {{ edu.ended_at|date:"Y" }}
-                                    {% endif %}
-                                </p>
-                            {% elif edu.started_at %}
-                                <p class="education-status status-ongoing">
-                                    Sedang berlangsung ({{ edu.started_at|date:"Y" }} - sekarang)
-                                </p>
-                            {% else %}
-                                <p class="education-status">
-                                    Periode pendidikan belum dicantumkan.
-                                </p>
-                            {% endif %}
-
                             <div class="project-card-actions">
                                 <div class="project-actions">
                                     <a href="{% url 'main:update_education' edu.id %}"
@@ -79,9 +65,15 @@
                             </div>
                         </article>
                     {% empty %}
-                        <p class="empty-state">
-                            Belum ada data edukasi.
-                        </p>
+                        {% if title_query %}
+                            <p class="empty-state">
+                                Tidak ada pendidikan dengan nama institusi tersebut.
+                            </p>
+                        {% else %}
+                            <p class="empty-state">
+                                Belum ada data edukasi.
+                            </p>
+                        {% endif %}
                     {% endfor %}
                 </div>
             </div>
