@@ -65,7 +65,6 @@ class EducationTest(TestCase):
             description="Menempuh pendidikan menengah atas.",
             major="IPA",
             degree="SMA",
-            started_at=timezone.now(),
         )
 
     def test_url_and_template_accessibility(self):
@@ -89,10 +88,17 @@ class EducationTest(TestCase):
         self.assertContains(response, self.education.description)
         self.assertContains(response, "SMA")
 
-    def test_education_ongoing_status(self):
-        self.assertTrue(self.education.is_ongoing)
-        response = self.client.get(reverse('main:show_education'))
-        self.assertContains(response, "Sedang berlangsung")
+    def test_education_page_without_period(self):
+        response = self.client.get(reverse("main:show_education"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.education.title)
+        self.assertNotContains(response, "Sedang berlangsung")
+        self.assertNotContains(response, "Selesai")
+        self.assertNotContains(
+            response,
+            "Periode pendidikan belum dicantumkan.",
+        )
 
     def test_education_empty_state(self):
         """Pesan kosong muncul saat data dihapus"""

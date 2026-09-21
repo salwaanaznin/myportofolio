@@ -39,14 +39,9 @@ class Education(models.Model):
     major = models.CharField(max_length=255, blank=True, null=True)
     degree = models.CharField(max_length=50, choices=EDUCATION_CHOICES, default='S1')
     thumbnail = models.URLField(blank=True, null=True)
-    started_at = models.DateTimeField(blank=True, null=True)
-    ended_at = models.DateTimeField(blank=True, null=True)
     def __str__(self):
         return f"{self.title} - {self.degree}"
     
-    @property
-    def is_ongoing(self):
-        return self.ended_at is None
 
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
