@@ -19,8 +19,11 @@ app_name = "main"
 urlpatterns = [
     path("", show_main, name="show_main"),
     path("experience/", show_experience, name="show_experience"),
+    # Named route digunakan oleh template dan redirect agar URL tidak ditulis manual.
     path("education/", show_education, name="show_education"),
     path("education/add/", create_education, name="create_education"),
+
+    # Konverter UUID mengikuti tipe primary key Education untuk memilih objek.
     path(
         "education/<uuid:education_id>/edit/",
         update_education,
@@ -39,5 +42,7 @@ urlpatterns = [
         delete_project,
         name="delete_project",
     ),
+    # Endpoint data tetap tersedia meskipun tidak ada tombol JSON pada halaman.
+    path("api/education/", get_education_json, name="get_education_json"),
     path("api/projects/", get_projects_json, name="get_projects_json"),
 ]

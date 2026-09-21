@@ -9,12 +9,13 @@
         <section class="education-section">
             <div class="container">
                 <h1>Hapus Pendidikan?</h1>
-
+                <!-- Nama institusi membantu pengguna memastikan data yang akan dihapus.-->
                 <p>
                     Apakah kamu yakin ingin menghapus
                     <strong>{{ education.title }}</strong>?
                 </p>
 
+                <!--Membuka halaman melalui GET tidak menghapus data; konfirmasi dikirim melalui POST.-->
                 <form method="post"
                       action="{% url 'main:delete_education' education.id %}"
                       class="project-form">
@@ -23,6 +24,7 @@
                     <button type="submit" class="button button-danger">
                         Ya, Hapus
                     </button>
+                    <!--Tautan Batal kembali ke daftar tanpa menjalankan penghapusan. -->
                     <a href="{% url 'main:show_education' %}"
                        class="button button-secondary">
                         Batal

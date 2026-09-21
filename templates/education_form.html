@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block meta %}
+<!--Judul diatur oleh view agar template yang sama dapat digunakan untuk tambah dan edit -->
     <title>{{ page_title }} - {{ name }}</title>
 {% endblock meta %}
 {% block content %}
@@ -7,19 +8,23 @@
         <section class="education-section">
             <div class="container">
                 <h1>{{ page_title }}</h1>
+                <!--POST dikirim ke URL tambah atau edit yang sedang dibuka-->
                 <form method="post"
                       class="project-form">
+                      <!--Token diperiksa middleware CSRF ketika form dikirim.-->
                     {% csrf_token %}
                     {% for field in form %}
                         <div class="form-group">
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {{ field }}
+                            <!--Kesalahan input ditampilkan di dekat field yang perlu diperbaiki.-->
                             {% for error in field.errors %}
                                 <p class="form-error">{{ error }}</p>
                             {% endfor %}
                         </div>
                     {% endfor %}
                     <button type="submit" class="button">{{ submit_label }}</button>
+                    <!-- Batal kembali ke daftar tanpa mengirim perubahan form. -->
                     <a href="{% url 'main:show_education' %}" class="button button-secondary">Batal</a>
                 </form>
             </div>

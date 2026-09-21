@@ -52,6 +52,7 @@ class ProjectForm(ModelForm):
         }
 
 class EducationForm(ModelForm):
+    """Form tambah dan edit pendidikan dengan validasi berdasarkan model Education."""
     class Meta:
         model = Education
         fields = [
@@ -70,6 +71,7 @@ class EducationForm(ModelForm):
             "thumbnail": "URL Logo Institusi",
         }
 
+        # Widget mengatur tampilan input; validasi tetap mengikuti field form/model.
         widgets = {
             "title": TextInput(
                 attrs={

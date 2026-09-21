@@ -28,6 +28,7 @@ class Experience(models.Model):
         return self.ended_at is None
 
 class Education(models.Model):
+    """Menyimpan data institusi pendidikan."""
     EDUCATION_CHOICES = [
         ('SMA', 'Senior High School'),
         ('S1', 'Undergraduate Student'),
@@ -38,6 +39,7 @@ class Education(models.Model):
     description = models.TextField()
     major = models.CharField(max_length=255, blank=True, null=True)
     degree = models.CharField(max_length=50, choices=EDUCATION_CHOICES, default='S1')
+    """Menyimpan URL gambar untuk tumbhnail"""
     thumbnail = models.URLField(blank=True, null=True)
     def __str__(self):
         return f"{self.title} - {self.degree}"
