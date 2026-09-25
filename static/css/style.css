@@ -6,10 +6,10 @@
 
 :root {
     --ink: #1c1917;
-    --paper: #faf6f0;
-    --accent: #d95d39;
-    --accent-dark: #a8442a;
-    --line: #e3d9c9;
+    --paper: #fafafa;
+    --accent: #d939d9;
+    --accent-dark: #a82a9b;
+    --line: #e3c9dc;
     --text-muted: #6b6459;
     --radius: 4px;
 }
@@ -33,20 +33,20 @@ h1, .brand {
 
 /* HEADER & NAVIGATION PILL CONTAINER (Membulat sesuai ilustrasi) */
 .site-header {
-    background-color: #fff3e0; /* Warna krem/orange lembut */
-    border: 3px solid #fa6940;   /* Garis pinggir orange */
+    background-color: #fffeff; /* Warna krem/orange lembut */
+    border: 3px solid #ea40fa;   /* Garis pinggir orange */
     border-radius: 1000px;      /* Membuat bentuk membulat/capsule */
     padding: 0.35rem 1.70rem;
     margin: 1.5rem auto;
     max-width: 90%;             /* Agar mengambang rapi di tengah */
-    box-shadow: 0 4px 12px rgba(255, 183, 77, 0.15);
+    box-shadow: 0 4px 12px rgba(180, 60, 170, 0.12);;
 }
 
 .site-header .brand {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.25rem;
     font-weight: 700;
-    color: #111827;
+    color: #261127;
     text-decoration: none;
 }
 
@@ -57,14 +57,14 @@ h1, .brand {
 
 .site-header nav a {
     text-decoration: none;
-    color: #374151;
+    color: #4b3751;
     font-weight: 600;
     font-size: 0.95rem;
     transition: color 0.2s ease;
 }
 
 .site-header nav a:hover {
-    color: #e65100;
+    color: #c700e6;
 }
 .site-header .container {
     display: flex;
@@ -250,7 +250,7 @@ h1, .brand {
 
 /* Card Container */
 .education-card {
-    border: 2px solid #ffc5b5;
+    border: 2.5px solid #ffb5fd;
     background-color: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
@@ -274,7 +274,7 @@ h1, .brand {
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    background-color: #f9fafb;
+    background-color: #fbf9fb;
     border-radius: 8px;
     padding: 6px;
 }
@@ -338,8 +338,8 @@ h1, .brand {
 
 /* Status Colors */
 .education-card .education-status {
-    background-color: #e0f2fe;
-    color: #d95d39; 
+    background-color: #fee0fe;
+    color: #d939d6; 
 }
 
 /* Empty State */
@@ -356,12 +356,12 @@ h1, .brand {
 
 .education-status.status-ongoing {
     background-color: #dbeafe;
-    color: #d95d39;
+    color: #d639d9;
 }
 
 .education-status.status-completed {
     background-color: #dcfce7;
-    color: #f9c4b7;
+    color: #f4b7f9;
 }
 
 /* NAVBAR CONTAINER*/
@@ -413,7 +413,7 @@ h1, .brand {
 
 /* Judul bagian skill */
 .skills-title {
-    color: #d95d39; 
+    color: #d939c9; 
     font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -429,8 +429,8 @@ h1, .brand {
 
 /* Bentuk kotak pills untuk tiap skill */
 .skill-pill {
-    background-color: #f9c4b7;
-    color: #b84323;            
+    background-color: #edc9f8;
+    color: #702080;          
     font-size: 0.9rem;
     font-weight: 500;
     padding: 8px 18px;
@@ -441,8 +441,8 @@ h1, .brand {
 
 /* Perubahan warna saat kursor diarahkan ke atas pills */
 .skill-pill:hover {
-    background-color: #d95d39;
-    color: #ffffff;
+    background-color: #ea97ff;
+    color: #52145f;
 }
 
 /* Styling section EXPERIENCE */
@@ -460,7 +460,7 @@ h1, .brand {
 }
 
 .experience-card {
-    border: 2px solid #ffc5b5;
+    border: 2.5px solid #fdb5ff;
     background-color: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
@@ -536,12 +536,12 @@ h1, .brand {
 
 .experience-status.status-ongoing {
     background-color: #dbeafe;
-    color: #d95d39;
+    color: #d939c4;
 }
 
 .experience-status.status-completed {
     background-color: #dcfce7;
-    color: #f9c4b7;
+    color: #f9b7f4;
 }
 
 /* Efek animasi kecil di samping judul */
@@ -596,7 +596,7 @@ h1, .brand {
 }
 
 .form-error {
-    color: #b42318;
+    color: #b418a2;
     font-size: 0.85rem;
     margin-top: 0.35rem;
 }
@@ -753,7 +753,7 @@ h1, .brand {
     margin-top: 1.5rem;
 }
 .button-danger {
-    background: #b42318;
+    background: #a218b4;
 }
 @media (max-width: 600px) {
     .project-header {
@@ -838,7 +838,7 @@ h1, .brand {
 
     /* Kurangi jarak dari navbar ke bagian profil. */
     .hero {
-        padding: 1.5rem 0 2rem;
+        padding: 1.875rem 0 2rem;
     }
 
     .hero-grid {
