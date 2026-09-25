@@ -12,6 +12,9 @@ from main.views import (
     show_main,
     show_projects,
     update_education,
+    register,
+    login_user,
+    logout_user
 )
 
 app_name = "main"
@@ -22,6 +25,9 @@ urlpatterns = [
     # Named route digunakan oleh template dan redirect agar URL tidak ditulis manual.
     path("education/", show_education, name="show_education"),
     path("education/add/", create_education, name="create_education"),
+    path("register/", register, name="register"),
+    path("login/", login_user, name="login"),
+    path("logout/", logout_user, name="logout"),
 
     # Konverter UUID mengikuti tipe primary key Education untuk memilih objek.
     path(
