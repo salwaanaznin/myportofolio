@@ -14,7 +14,8 @@ from main.views import (
     update_education,
     register,
     login_user,
-    logout_user
+    logout_user,
+    toggle_star
 )
 
 app_name = "main"
@@ -51,4 +52,11 @@ urlpatterns = [
     # Endpoint data tetap tersedia meskipun tidak ada tombol JSON pada halaman.
     path("api/education/", get_education_json, name="get_education_json"),
     path("api/projects/", get_projects_json, name="get_projects_json"),
+
+    # Tambahkan path ini ke dalam urlpatterns
+    path(
+        "projects/<uuid:project_id>/star/",
+        toggle_star,
+        name="toggle_star",
+    ),
 ]
