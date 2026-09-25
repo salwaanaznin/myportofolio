@@ -787,3 +787,126 @@ h1, .brand {
         text-align: center;
     }
 }
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    /* Pisahkan nama dan menu agar navigasi tidak keluar dari header. */
+    .site-header {
+        width: calc(100% - 2rem);
+        max-width: 600px;
+        margin: 0.75rem auto 0;
+        padding: 0;
+        border-width: 2px;
+        border-radius: 20px;
+    }
+
+    .site-header .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .site-header .brand {
+        font-size: 1rem;
+        line-height: 1.4;
+        text-align: center;
+        overflow-wrap: anywhere;
+    }
+
+    .site-header nav {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.125rem;
+        width: 100%;
+    }
+
+    .site-header nav a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0.25rem 0;
+        font-size: 0.75rem;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+    /* Kurangi jarak dari navbar ke bagian profil. */
+    .hero {
+        padding: 1.5rem 0 2rem;
+    }
+
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "identity"
+            "photo"
+            "details";
+        gap: 1.25rem;
+    }
+
+    .hero-identity,
+    .hero-details {
+        min-width: 0;
+    }
+
+    .hero-kicker {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-identity h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+        line-height: 1.05;
+    }
+
+    .hero-photo {
+        width: min(220px, calc(100% - 12px));
+        max-width: 220px;
+        margin-bottom: 0.5rem;
+    }
+
+    .photo-block {
+        top: 0.5rem;
+        left: 0.5rem;
+    }
+
+    .bio {
+        margin-bottom: 1rem;
+    }
+
+    .meta-list {
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .skills-section {
+        margin: 0 auto 2rem;
+        padding: 0 1rem;
+    }
+
+    /* Halaman lain juga dibuat muat dalam lebar layar HP. */
+    .education-section,
+    .experience-section {
+        padding: 1.5rem 0;
+    }
+
+    .education-grid,
+    .experience-grid,
+    .project-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .education-card,
+    .experience-card {
+        min-width: 0;
+        padding: 1rem;
+        overflow-wrap: anywhere;
+    }
+}
