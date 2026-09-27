@@ -15,19 +15,46 @@
     <header class="site-header">
         <div class="container">
             <a href="{% url 'main:show_main' %}" class="brand">{{ name }}</a>
-            <nav>
-                <a href="{% url 'main:show_main' %}">Profile</a>
-                <a href="{% url 'main:show_experience' %}">Experience</a>
-                <a href="{% url 'main:show_education' %}">Education</a>
-                <a href="{% url 'main:show_projects' %}">Projects</a>
-                {% if user.is_authenticated %}
-                    <span class="nav-user">{{ user.username }}</span>
-                    <a href="{% url 'main:logout' %}">Logout</a>
-                {% else %}
-                    <a href="{% url 'main:login' %}">Login</a>
-                    <a href="{% url 'main:register' %}">Register</a>
-                {% endif %}
-            </nav>
+<!-- Menu desktop -->
+<nav class="desktop-nav" aria-label="Navigasi utama">
+    <a href="{% url 'main:show_main' %}">Profile</a>
+    <a href="{% url 'main:show_experience' %}">Experience</a>
+    <a href="{% url 'main:show_education' %}">Education</a>
+    <a href="{% url 'main:show_projects' %}">Projects</a>
+
+    {% if user.is_authenticated %}
+        <span class="nav-user">{{ user.username }}</span>
+        <a href="{% url 'main:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'main:login' %}">Login</a>
+        <a href="{% url 'main:register' %}">Register</a>
+    {% endif %}
+        </nav>
+
+        <!-- Menu mobile -->
+        <nav class="mobile-nav" aria-label="Navigasi mobile">
+            <a href="{% url 'main:show_main' %}">Profile</a>
+
+            <details class="mobile-about">
+                <summary>
+                    About Me <span aria-hidden="true">⌄</span>
+                </summary>
+
+                <div class="mobile-about-links">
+                    <a href="{% url 'main:show_experience' %}">Experience</a>
+                    <a href="{% url 'main:show_education' %}">Education</a>
+                    <a href="{% url 'main:show_projects' %}">Projects</a>
+
+                    {% if user.is_authenticated %}
+                        <span class="nav-user">{{ user.username }}</span>
+                        <a href="{% url 'main:logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'main:login' %}">Login</a>
+                        <a href="{% url 'main:register' %}">Register</a>
+                    {% endif %}
+                </div>
+            </details>
+        </nav>
         </div>
     </header>
 
