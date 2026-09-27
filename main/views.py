@@ -61,10 +61,16 @@ def show_education(request):
     education_list = [entry.object for entry in education]
     title_query = request.GET.get("title", "").strip()
 
+    is_editor_user = (
+        request.user.is_authenticated
+        and request.user.groups.filter(name="Editor").exists()
+    )
+
     context = {
         "name": "Salwa's portofolio",
         "education_list": education_list,
         "title_query": title_query,
+        "is_editor": is_editor_user,
     }
     return render(request, "education.html", context)
 

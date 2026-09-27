@@ -12,11 +12,15 @@
 
                 <div class="project-header">
                     <h1>Education <span class="anim-icon">🎓</span></h1>
-                    <a href="{% url 'main:create_education' %}"
-                       class="button project-add-button">
-                        <span aria-hidden="true">+</span>
-                        Tambah Pendidikan
-                    </a>
+
+                    <!-- Tambah Pendidikan hanya untuk superuser -->
+                    {% if user.is_superuser %}
+                        <a href="{% url 'main:create_education' %}"
+                        class="button project-add-button">
+                            <span aria-hidden="true">+</span>
+                            Tambah Pendidikan
+                        </a>
+                    {% endif %}
                 </div>
                 <!--GET menaruh kata pencarian di URL agar hasilnya dapat dibuka kembali. -->
                 <form method="get"
@@ -53,16 +57,23 @@
 
                             <div class="project-card-actions">
                                 <div class="project-actions">
-                                    <a href="{% url 'main:update_education' edu.id %}"
-                                       class="button"
-                                       aria-label="Edit {{ edu.title }}">
-                                        Edit
-                                    </a>
-                                    <a href="{% url 'main:delete_education' edu.id %}"
-                                       class="button button-danger"
-                                       aria-label="Hapus {{ edu.title }}">
-                                        Hapus
-                                    </a>
+                                    <!-- Edit hanya untuk superuser/editor -->
+                                    {% if user.is_superuser or is_editor %}
+                                        <a href="{% url 'main:update_education' edu.id %}"
+                                        class="button"
+                                        aria-label="Edit {{ edu.title }}">
+                                            Edit
+                                        </a>
+                                    {% endif %}
+
+                                    <!-- Hapus hanya untuk superuser -->
+                                    {% if user.is_superuser %}
+                                        <a href="{% url 'main:delete_education' edu.id %}"
+                                        class="button button-danger"
+                                        aria-label="Hapus {{ edu.title }}">
+                                            Hapus
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </article>
