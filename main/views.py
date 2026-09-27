@@ -61,16 +61,11 @@ def show_education(request):
     education_list = [entry.object for entry in education]
     title_query = request.GET.get("title", "").strip()
 
-    is_editor_user = (
-        request.user.is_authenticated
-        and request.user.groups.filter(name="Editor").exists()
-    )
-
     context = {
         "name": "Salwa's portofolio",
         "education_list": education_list,
         "title_query": title_query,
-        "is_editor": is_editor_user,
+        "is_editor": is_editor(request.user),
     }
     return render(request, "education.html", context)
 
@@ -185,6 +180,8 @@ def show_projects(request):
 
 @login_required(login_url="/login/")
 def delete_project(request, project_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
     project = get_object_or_404(Project, pk=project_id)
     if request.method == "POST":
         project.delete()
@@ -244,7 +241,10 @@ def toggle_star(request, project_id):
     return redirect("main:show_projects")
 
 def is_editor(user):
-    return user.groups.filter(name="Editor").exists()
+    return (
+        user.is_authenticated
+        and user.groups.filter(name="Editor").exists()
+    )
 
 #Toggle star untuk education
 @login_required(login_url="/login/")
