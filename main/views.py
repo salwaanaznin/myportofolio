@@ -68,8 +68,12 @@ def show_education(request):
     }
     return render(request, "education.html", context)
 
+@login_required(login_url="/login/")
 @require_http_methods(["GET", "POST"])
 def create_education(request):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    
     form = EducationForm(
         request.POST if request.method == "POST" else None
     )
@@ -87,9 +91,12 @@ def create_education(request):
     }
     return render(request, "education_form.html", context)
 
-
+@login_required(login_url="/login/")
 @require_http_methods(["GET", "POST"])
 def update_education(request, education_id):
+    if not request.user.is_superuser and not is_editor(request.user):
+        raise PermissionDenied
+    
     education = get_object_or_404(Education, pk=education_id)
     form = EducationForm(
         request.POST if request.method == "POST" else None,
@@ -109,9 +116,12 @@ def update_education(request, education_id):
     }
     return render(request, "education_form.html", context)
 
-
+@login_required(login_url="/login/")
 @require_http_methods(["GET", "POST"])
 def delete_education(request, education_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+    
     education = get_object_or_404(Education, pk=education_id)
 
     if request.method == "POST":
@@ -226,3 +236,6 @@ def toggle_star(request, project_id):
             project.starred_by.add(request.user)
 
     return redirect("main:show_projects")
+
+def is_editor(user):
+    return user.groups.filter(name="Editor").exists()
