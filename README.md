@@ -141,3 +141,43 @@ Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%203/No_2.jpeg) 
 *Hasil dari AI:*
 Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%203/No_3.jpeg) (arahkan kursor ke link)
 - data pendidikan tetap tampil tanpa keterangan periode, sesuai perubahan kode saya yang mana tidak mencantumkan started at dan ended at sebagai timestamp
+
+
+***Screenshoot Prompting Penggunaan AI**
+Saya menggunakan ChatGpt sebagai tools pembantu untuk beberapa bagian spesifik berikut terkait pengerjaan Tugas 4.
+### 1. Sembunyikan tombol create/edit/delete berdasarkan berbagai macam role 
+*Prompt:*
+- aku mau hide tombol create/edit/delete berdasarkan role gimana yaa? harusnya edit education_star.html kan
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%204/no-1.jpeg) (arahkan kursor ke link)
+AI menjelaskan bahwa penyembunyian tombol Create, Edit, dan Delete seharusnya dilakukan di education.html, bukan education_star.html. AI juga memberikan kondisi template berdasarkan role.AI juga mengingatkan bahwa variabel is_editor perlu dikirim dari show_education() melalui context. 
+
+*Tindak lanjut saya:*
+Saya mengikuti saran tersebut dengan menambahkan kondisi {% if %} pada education.html dan menambahkan status is_editor ke context di show_education(). Saya juga tetap mempertahankan pengecekan authorization di sisi server menggunakan @login_required dan PermissionDenied
+
+
+### 2. Pesan Error 404 atau 403 saat bagian authorization 
+*Prompt:*
+- aku lagi mengetes authorization akses edit buat user reguler tp dapet 404, padahal seharusnya 403? kenapa yaa apakah kode aku ada yg salah di url nya 
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%204/no-2.jpeg) (arahkan kursor ke link)
+AI menyarankan menggunakan UUID Education yang valid untuk menguji authorization. Setelah memeriksa urutan pemeriksaan pada kode, saya memahami bahwa respons juga bergantung pada tahap penolakan request. UUID dengan format tidak valid menghasilkan 404 karena tidak cocok dengan route. Pada update_education(), pengguna biasa menerima 403 sebelum pencarian objek dilakukan. Sementara itu, pengguna yang memiliki izin menerima 404 apabila UUID valid secara format tetapi objek tidak ditemukan.
+
+*Tindak lanjut saya:*
+Saya mengambil UUID Education yang valid dari endpoint /api/education/ lalu menguji kembali URL edit menggunakan akun regular user. Setelah menggunakan UUID yang benar, server mengembalikan 403 Forbidden sesuai requirement. Karena itu, masalahnya ternyata berasal dari URL pengujian yang salah.
+
+
+### 3.Evaluasi Implementasi is_editor()
+*Prompt:*
+- aku sudah punya fungsi is_editor(user). mending dipanggil dari view atau query group langsung di show_education? jelasin penggunannya
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%204/no-3.jpeg) (arahkan kursor ke link)
+AI menyarankan untuk memakai helper is_editor(user) secara konsisten daripada menulis query Group secara langsung di beberapa tempat. Helper tersebut dapat dipakai baik di show_education() untuk mengirim status Editor ke template maupun di update_education() untuk pengecekan authorization. Menurut AI, pendekatan ini mengurangi duplikasi kode dan membuat logika role lebih mudah dirawat.
+
+*Tindak lanjut saya:*
+Saya menggunakan helper is_editor(user) pada show_education() untuk mengirim status Editor ke template dan pada update_education() untuk pemeriksaan authorization. Helper juga memeriksa is_authenticated. Dengan demikian, logika keanggotaan Group Editor tidak perlu ditulis ulang pada kedua view tersebut.
+
+
+
