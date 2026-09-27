@@ -15,7 +15,8 @@ from main.views import (
     register,
     login_user,
     logout_user,
-    toggle_star
+    toggle_star,
+    toggle_education_star,
 )
 
 app_name = "main"
@@ -58,5 +59,12 @@ urlpatterns = [
         "projects/<uuid:project_id>/star/",
         toggle_star,
         name="toggle_star",
+    ),
+
+    # Menambahkan path toggle star educationn ke dalam urlpatterns
+    path(
+        "education/<uuid:education_id>/star/",
+        toggle_education_star,
+        name="toggle_education_star",
     ),
 ]

@@ -1,0 +1,27 @@
+<!--Form star untuk setiap Education -->
+<form method="post"
+    action="{% url 'main:toggle_education_star' edu.id %}"
+    class="star-form">
+    {% csrf_token %}
+
+    <!--Tombol diberi class tambahan jika user sudah memberi star-->
+    <button type="submit"
+            class="button button-star{% if user in edu.starred_by.all %} is-starred{% endif %}"
+            title="{% if edu.starred_by.all %}Dibintangi oleh {{ edu.starred_by.all|join:', ' }}{% else %}Jadilah yang pertama memberi star{% endif %}">
+
+        <span aria-hidden="true">★</span>
+
+        <!-- Tampilkan Star atau Unstar sesuai status user-->
+        {% if user in edu.starred_by.all %}
+            Unstar
+        {% else %}
+            Star
+        {% endif %}
+
+        <!--Jumlah total star -->
+        <span class="star-count">
+            {{ edu.starred_by.count }}
+        </span>
+
+    </button>
+</form>

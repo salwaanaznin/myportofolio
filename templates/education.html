@@ -57,6 +57,9 @@
 
                             <div class="project-card-actions">
                                 <div class="project-actions">
+
+                                    <!-- Semua user dapat melihat tombol star -->
+                                    {% include "components/education_star.html" with edu=edu %}
                                     <!-- Edit hanya untuk superuser/editor -->
                                     {% if user.is_superuser or is_editor %}
                                         <a href="{% url 'main:update_education' edu.id %}"

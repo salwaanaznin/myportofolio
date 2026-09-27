@@ -42,6 +42,13 @@ class Education(models.Model):
     degree = models.CharField(max_length=50, choices=EDUCATION_CHOICES, default='S1')
     """Menyimpan URL gambar untuk tumbhnail"""
     thumbnail = models.URLField(blank=True, null=True)
+
+    # Relasi star antara Education dan User
+    starred_by = models.ManyToManyField(
+        User,
+        related_name="starred_educations",
+        blank=True,
+    )
     def __str__(self):
         return f"{self.title} - {self.degree}"
     
