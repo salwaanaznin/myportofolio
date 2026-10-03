@@ -45,22 +45,42 @@ def show_experience(request):
 
 def get_education_json(request):
     title_query = request.GET.get("title", "").strip()
-    education = Education.objects.all()
+    education_list = Education.objects.prefetch_related("starred_by").all()
 
-    if title_query:
-        education = education.filter(title__icontains=title_query)
+    data = []
 
-    education_json = serializers.serialize("json", education, use_natural_foreign_keys=True)
-    return HttpResponse(education_json, content_type="application/json")
+    for education in education_list:
+        starred_users = education.starred_by.all()
+
+        is_starred = (
+            request.user in starred_users
+            if request.user.is_authenticated
+            else False
+        )
+
+        starred_by_names = ", ".join(
+            [user.username for user in starred_users]
+        )
+
+        data.append({
+            "pk": str(education.id),
+            "fields": {
+                "title": education.title,
+                "description": education.description,
+                "major": education.major,
+                "degree": education.degree,
+                "degree_display": education.get_degree_display(),
+                "thumbnail": education.thumbnail,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 
 def show_education(request):
-    json_response = get_education_json(request)
-    education = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    education_list = [entry.object for entry in education]
     title_query = request.GET.get("title", "").strip()
 
     context = {
