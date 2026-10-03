@@ -100,6 +100,16 @@
                 .hidePopover();
         }
 
+        // Melakukan escaping karakter HTML untuk mencegah XSS.
+        function escapeHtml(value) {
+            return String(value ?? "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#39;");
+        }
+
         // Membuat card Education
         function buildEducationCardElement(item) {
             const education = item.fields;
@@ -111,14 +121,14 @@
             const imageHtml = education.thumbnail
                 ? `
                     <div class="education-logo-wrapper">
-                        <img src="${education.thumbnail}"
-                            alt="${education.title} Logo">
+                        <img src="${escapeHtml(education.thumbnail)}"
+                            alt="${escapeHtml(education.title)} Logo">>
                     </div>
                 `
                 : "";
 
             const majorText = education.major
-                ? ` - ${education.major}`
+                ? ` - ${escapeHtml(education.major)}`
                 : "";
 
             // Dummy UUID diganti dengan ID education sebenarnya
@@ -158,7 +168,7 @@
                 education.is_starred ? "Unstar" : "Star";
 
             const starTitle = education.star_count > 0
-                ? `Dibintangi oleh ${education.starred_by_names}`
+                ? `Dibintangi oleh ${escapeHtml(education.starred_by_names)}`
                 : "Jadilah yang pertama memberi star";
 
             const starHtml = IS_AUTHENTICATED
@@ -184,14 +194,15 @@
             const completeCardHtml = `
                 ${imageHtml}
 
-                <h2>${education.title}</h2>
+                <h2>${escapeHtml(education.title)}</h2>
 
                 <span class="education-category">
-                    ${education.degree_display}${majorText}
+                    ${escapeHtml(education.degree_display)}
+                    ${majorText}
                 </span>
 
                 <p class="education-description">
-                    ${education.description}
+                    ${escapeHtml(education.description)}
                 </p>
 
                 <div class="project-card-actions">
