@@ -181,3 +181,68 @@ Saya menggunakan helper is_editor(user) pada show_education() untuk mengirim sta
 
 
 
+## Tugas 5
+
+### 1. Apa itu debouncing dan mengapa penting pada pencarian AJAX?
+Debouncing adalah teknik untuk menunda eksekusi suatu fungsi sampai pengguna berhenti melakukan suatu aksi selama beberapa waktu tertentu.
+
+Pada fitur pencarian AJAX, debouncing penting karena tanpa teknik ini setiap karakter yang diketik pengguna dapat langsung mengirim request baru ke server. Hal tersebut dapat menyebabkan terlalu banyak request dalam waktu singkat.
+
+Pada implementasi saya, pencarian Education menggunakan delay 300 ms. Request baru dikirim setelah pengguna berhenti mengetik selama 300 ms. Dengan cara ini, pencarian menjadi lebih efisien dan server tidak menerima request yang sebenarnya belum diperlukan.
+
+### 2. Apa fungsi `await` ketika menggunakan `fetch()`? Apa yang terjadi jika tidak menggunakan `await`?
+- `fetch()` merupakan operasi asynchronous yang mengembalikan sebuah `Promise`.
+- Keyword `await` digunakan agar JavaScript menunggu sampai Promise tersebut selesai sebelum melanjutkan ke proses berikutnya. 
+
+### 3. Apa itu XSS dan mengapa data AJAX lebih rentan dibanding template Django?
+Cross-Site Scripting atau XSS adalah serangan ketika input berbahaya berhasil dimasukkan ke halaman web dan kemudian dieksekusi sebagai kode JavaScript oleh browser.
+Template Django secara default memiliki mekanisme auto-escaping terhadap data yang ditampilkan menggunakan template variable. Namun, pada implementasi AJAX, data dari server diterima dalam bentuk JSON dan kemudian dimasukkan ke halaman menggunakan JavaScript.
+
+Pada kasus ini, saya menggunakan innerHTML untuk membentuk card Education. Karena data dimasukkan melalui JavaScript, perlindungan auto-escaping dari template Django tidak secara otomatis diterapkan.
+
+Oleh karena itu, saya menggunakan fungsi escapeHtml() untuk mengubah karakter khusus seperti <, >, ", ', dan & menjadi HTML entity sebelum data dimasukkan ke innerHTML.
+Selain perlindungan di sisi client, saya juga menggunakan strip_tags() pada EducationForm untuk membersihkan input dari tag HTML di sisi server.
+
+
+***Screenshoot Prompting Penggunaan AI**
+Saya menggunakan ChatGpt sebagai tools pembantu untuk beberapa bagian spesifik berikut terkait pengerjaan Tugas 5. 
+### 1. Validasi Keamanan XSS 
+*Prompt:*
+- buat keamanan xss, aku udah pake escapehtml() terus kurang apalagi buat validasi
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%205/no-1.jpeg) (arahkan kursor ke link)
+AI menjelaskan bahwa escapeHtml() di frontend berfungsi sebagai output encoding, yaitu mengubah karakter khusus seperti <, >, ", ', dan & menjadi bentuk HTML entity agar data yang dimasukkan melalui innerHTML tidak dieksekusi sebagai HTML atau JavaScript.
+Namun, escapeHtml() saja belum cukup karena perlindungan hanya terjadi saat data ditampilkan. Oleh karena itu, backend tetap perlu melakukan sanitasi dan validasi input. Pada Django Form, strip_tags() dapat digunakan untuk menghapus tag HTML sebelum data disimpan, sedangkan ValidationError dapat digunakan jika setelah dibersihkan nilai menjadi kosong atau tidak valid.
+
+*Tindak lanjut saya:*
+Saya memeriksa kembali implementasi EducationForm dan memastikan bahwa field title, description, dan major dibersihkan menggunakan strip_tags().
+Pada field title, saya juga menambahkan pengecekan agar input yang hanya berisi tag HTML ditolak menggunakan ValidationError. Di sisi frontend, saya tetap menggunakan escapeHtml() sebelum memasukkan data Education ke innerHTML.
+
+### 2. Penggunaan await pada fetch() dan response.json()
+*Prompt:*
+- knp perlu await di fetch() dan response.json()? kalau misalkan salah satu dihapus aja gapapa kah
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%205/no-2.jpeg) (arahkan kursor ke link)
+AI menjelaskan bahwa `fetch()` dan `response.json()` sama-sama menghasilkan `Promise`, tetapi keduanya menunggu proses yang berbeda.
+`await fetch(url)` digunakan untuk menunggu response HTTP dari server sampai objek `Response` tersedia. Setelah itu, `await response.json()` digunakan untuk menunggu body response selesai dibaca dan dikonversi menjadi data JavaScript. Jika `await` pada `fetch()` dihapus, variabel `response` masih berupa Promise sehingga method seperti `response.json()` belum dapat digunakan secara langsung.
+
+*Tindak lanjut saya:*
+Setelah memahami penjelasan tersebut, saya memeriksa kembali fungsi AJAX pada halaman Education dan memastikan bahwa proses pengambilan data menggunakan:
+***javascript
+const response = await fetch(url);
+const educationData = await response.json();***
+
+
+### 3.Final check implementasi Tugas 5 terhadap seluruh requirement
+*Prompt:*
+- boleh final check in seluruh commit aku di git branch tugas-5 ini sebelum aku nulis readme gak, jadi kayak double check semua requirements minimal yg hrs diselesaiin di tugas 5 ini udh terpenuhi di kode yg tercommit blmnya
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%205/no-3.jpeg) (arahkan kursor ke link)
+AI membantu melakukan pemeriksaan akhir terhadap implementasi Tugas 5 dengan membandingkan kode yang sudah dibuat dengan requirement tugas.
+Dari pengecekan tersebut, AI menemukan dua hal yang masih perlu diperbaiki. Pertama, fungsi get_education_json() sudah membaca parameter title_query, tetapi belum menggunakan parameter tersebut untuk memfilter data Education. Hal ini menyebabkan fitur pencarian AJAX belum benar-benar memfilter hasil dari backend.
+
+*Tindak lanjut saya:*
+Saya Menambahkan .filter(title__icontains=title_query), menghapus route duplikat, lalu menguji ulang AJAX search sampai hasil dapat tersaring tanpa reload.
