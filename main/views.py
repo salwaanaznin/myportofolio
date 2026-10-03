@@ -85,9 +85,9 @@ def show_education(request):
 
     context = {
         "name": "Salwa's portofolio",
-        "education_list": education_list,
         "title_query": title_query,
         "is_editor": is_editor(request.user),
+        "form": EducationForm(),
     }
     return render(request, "education.html", context)
 
@@ -316,3 +316,46 @@ def create_project_ajax(request):
         )
 
     return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
+# View AJAX untuk menambahkan education dengan validasi form dan hak akses superuser.
+@require_POST
+def create_education_ajax(request):
+    if not request.user.is_authenticated:
+        return JsonResponse(
+            {
+                "message":
+                "Silakan login terlebih dahulu."
+            },
+            status=403,
+        )
+
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {
+                "message":
+                "Hanya pemilik portofolio yang dapat menambahkan pendidikan."
+            },
+            status=403,
+        )
+
+    form = EducationForm(request.POST)
+
+    if form.is_valid():
+        education = form.save()
+
+        return JsonResponse(
+            {
+                "message":
+                "Pendidikan berhasil ditambahkan.",
+                "pk": str(education.id),
+            },
+            status=201,
+        )
+
+    return JsonResponse(
+        {
+            "errors":
+            form.errors.get_json_data()
+        },
+        status=400,
+    )

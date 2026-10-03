@@ -15,11 +15,12 @@
 
                     <!-- Tambah Pendidikan hanya untuk superuser -->
                     {% if user.is_superuser %}
-                        <a href="{% url 'main:create_education' %}"
-                           class="button project-add-button">
+                        <button type="button"
+                                class="button project-add-button"
+                                popovertarget="add-education-modal">
                             <span aria-hidden="true">+</span>
                             Tambah Pendidikan
-                        </a>
+                        </button>
                     {% endif %}
                 </div>
 
@@ -57,6 +58,9 @@
             </div>
         </section>
     </main>
+    {% if user.is_superuser %}
+        {% include "components/education_form_modal.html" %}
+    {% endif %}
 
     <script>
         // Konfigurasi
@@ -88,6 +92,12 @@
             errorState.classList.toggle("hide", !showError);
             emptyState.classList.toggle("hide", !showEmpty);
             gridContainer.classList.toggle("hide", !showGrid);
+        }
+        
+        function closeEducationModal() {
+            document
+                .getElementById("add-education-modal")
+                .hidePopover();
         }
 
         // Membuat card Education
