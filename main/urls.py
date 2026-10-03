@@ -44,7 +44,6 @@ urlpatterns = [
         delete_education,
         name="delete_education",
     ),
-    path("api/education/", get_education_json, name="get_education_json"),
     path("projects/", show_projects, name="show_projects"),
     path("projects/add/", create_project, name="create_project"),
     path(

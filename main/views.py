@@ -13,8 +13,6 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from django.contrib import messages
-from django.core import serializers
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
@@ -47,6 +45,8 @@ def get_education_json(request):
     title_query = request.GET.get("title", "").strip()
     education_list = Education.objects.prefetch_related("starred_by").all()
 
+    if title_query:
+        education_list = education_list.filter(title__icontains=title_query)
     data = []
 
     for education in education_list:

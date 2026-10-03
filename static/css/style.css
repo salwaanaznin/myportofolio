@@ -677,3 +677,7 @@ a { color: var(--accent-dark); text-underline-offset: .2em; }
         text-align: center;
     }
 }
+
+.hide {
+    display: none !important;
+}
