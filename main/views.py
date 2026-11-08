@@ -16,7 +16,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
-
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 def show_main(request):
     last_login = request.COOKIES.get('last_login', 'Belum ada sesi login / Cookie tidak ditemukan')
@@ -79,16 +79,30 @@ def get_education_json(request):
 
     return JsonResponse(data, safe=False)
 
-
+#Pasang decorator tepat di atas fungsi
+@ensure_csrf_cookie
 def show_education(request):
     title_query = request.GET.get("title", "").strip()
+
+    education_list = Education.objects.order_by("title", "id")
+    if title_query:
+        education_list = education_list.filter(
+            title__icontains=title_query
+        )
+
+    is_owner = request.user.is_authenticated and request.user.is_superuser
+    editor = is_editor(request.user)
 
     context = {
         "name": "Salwa's portofolio",
         "title_query": title_query,
-        "is_editor": is_editor(request.user),
+        "is_editor": editor,
         "form": EducationForm(),
+        "education_list": education_list,
+        "can_create_education": is_owner,
+        "can_edit_education": is_owner or editor,
     }
+
     return render(request, "education.html", context)
 
 @login_required(login_url="/login/")
