@@ -246,3 +246,85 @@ Dari pengecekan tersebut, AI menemukan dua hal yang masih perlu diperbaiki. Pert
 
 *Tindak lanjut saya:*
 Saya Menambahkan .filter(title__icontains=title_query), menghapus route duplikat, lalu menguji ulang AJAX search sampai hasil dapat tersaring tanpa reload.
+
+### Tugas 6
+
+**1. Apa yang dimaksud REST, mengapa JSON belum cukup, dan apa perbedaan PUT dan PATCH?**
+REST (Representational State Transfer) merupakan gaya arsitektur untuk membangun sistem yang berkomunikasi melalui resource. Setiap resource memiliki identitas, misalnya URL /api/v1/education/{id}/ untuk sebuah data pendidikan.
+
+API yang mengembalikan JSON belum tentu RESTful karena JSON hanya merupakan format representasi data. Sebuah API RESTful juga perlu memperhatikan prinsip REST, seperti antarmuka yang konsisten, komunikasi stateless, identifikasi resource melalui URI, dan penggunaan metode HTTP sesuai maknanya.
+
+Contohnya, GET digunakan untuk membaca data, POST untuk membuat resource, PUT untuk mengganti representasi resource, PATCH untuk memperbarui sebagian data, dan DELETE untuk menghapusnya.
+
+PUT digunakan ketika klien ingin mengirim representasi lengkap dari suatu data. Misalnya, Editor mengganti seluruh informasi Education, termasuk title, description, major, degree, dan thumbnail.
+
+PATCH digunakan ketika hanya sebagian informasi yang berubah. Contohnya, Editor hanya ingin mengganti major dari Ilmu Komputer menjadi Sistem Informasi tanpa mengirim ulang field lainnya.
+
+**2. Apa peran serializer di Django REST Framework dan apa keuntungannya dibandingkan JsonResponse manual?**
+Serializer berfungsi mengubah data dari object Django menjadi representasi yang dapat dikirim sebagai JSON. Serializer juga menerima input dari klien, memvalidasi data, dan membantu
+menyimpan atau memperbarui object melalui metode save().
+
+Pada EducationSerializer, saya menentukan daftar field secara eksplisit dan menambahkan star_count serta is_starred sebagai field hasil perhitungan yang tidak dapat diubah oleh klien. Saya juga menggunakan validate_title dan validate_description untuk membersihkan tag HTML serta menolak input tidak valid.
+
+Dibandingkan menyusun dictionary secara manual dan mengembalikannya melalui JsonResponse, ModelSerializer membuat kode lebih terstruktur, mengurangi pengulangan, menggunakan validasi field berdasarkan model, dan menyediakan penanganan error yang konsisten.
+
+Dengan demikian, perubahan pada aturan validasi dapat dikelola di serializer tanpa perlu menduplikasi logika di setiap API view.
+
+**3. Apa perbedaan autentikasi dan otorisasi, dan mengapa permission harus diperiksa pada server?**
+
+Autentikasi merupakan proses memastikan identitas pengguna, misalnya melalui sesi login Django. Setelah autentikasi berhasil, server mengetahui akun yang sedang mengirim permintaan.
+
+Otorisasi menentukan tindakan yang boleh dilakukan oleh akun tersebut. Dalam proyek ini, pengguna biasa boleh memberikan star, Editor dapat mengubah Education, sedangkan superuser dapat membuat dan menghapus data.
+
+Menyembunyikan tombol Edit atau Delete di HTML saja tidak cukup untuk menjamin keamanan. Pengguna masih bisa mengirim permintaan HTTP secara langsung melalui browser developer tools atau aplikasi seperti Postman.
+
+Karena itu, permission harus diperiksa oleh server pada setiap permintaan. Saya memakai IsPortfolioOwnerOrEditorOrReadOnly untuk mengatur operasi Education dan IsAuthenticated untuk star. Dengan begitu, request yang melanggar hak akses ditolak walaupun tidak dikirim melalui tampilan website.
+
+**4. Mengapa CSRF masih diperlukan dengan SessionAuthentication, dan mengapa force_authenticate tidak cukup untuk mengujinya?**
+
+SessionAuthentication memanfaatkan cookie sesi untuk mengetahui pengguna yang sudah login. Cookie tersebut dapat dikirim secara otomatis oleh browser.
+
+Tanpa perlindungan CSRF, sebuah situs lain berpotensi memancing browser pengguna yang sedang login agar mengirim permintaan yang mengubah data ke aplikasi kita.
+
+Token CSRF membantu server memastikan bahwa permintaan yang mengubah data berasal dari konteks yang dipercaya. Karena itu, fetch() untuk POST, PUT, PATCH, dan DELETE perlu menyertakan header X-CSRFToken.
+
+force_authenticate pada pengujian DRF mengatur identitas pengguna secara langsung untuk mempermudah pengujian permission. Mekanisme tersebut tidak menguji alur login berbasis sesi dan tidak membuktikan bahwa validasi CSRF benar-benar bekerja.
+
+Oleh karena itu, saya juga menggunakan APIClient(enforce_csrf_checks=True) bersama .login() untuk menguji permintaan sesi yang tidak menyertakan token CSRF.Permintaan tersebut diharapkan ditolak oleh server.
+
+### AI Disclosure
+***Screenshoot Prompting Penggunaan AI**
+Saya menggunakan ChatGpt sebagai tools pembantu untuk beberapa bagian spesifik berikut terkait pengerjaan Tugas 6. 
+### 1. Implementasi Role-Based Permission pada API Education
+*Prompt:*
+- gimana nerapin empat peran pengguna pake `IsPortfolioOwnerOrEditorOrReadOnly` tanpa ngubah permission Projects dari Tutorial 7
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%206/no-1.jpeg)
+AI menjelaskan cara menerapkan empat peran pengguna (pengunjung, pengguna biasa, Editor, dan superuser) menggunakan IsPortfolioOwnerOrEditorOrReadOnly. AI menyarankan pemisahan permission antara API Projects dan Education agar implementasi Tugas 6 tidak mengganggu Tutorial 7. AI juga memberikan contoh penerapan decorator permission pada endpoint Education dan penggunaan IsAuthenticated untuk fitur Star.
+
+*Tindak lanjut saya:*
+Saya menerapkan IsPortfolioOwnerOrEditorOrReadOnly pada endpoint education_list() dan education_detail(), serta mempertahankan IsPortfolioOwnerOrReadOnly pada API Projects. Saya juga menggunakan IsAuthenticated pada endpoint Star agar hanya pengguna yang sudah login dapat memberikan atau membatalkan star. Selanjutnya, saya melakukan pengujian hak akses menggunakan APITestCase untuk memastikan masing-masing peran memiliki izin yang sesuai.
+
+### 2. Integrasi AJAX Education dengan Django REST Framework tanpa Mengubah Desain
+*Prompt:*
+- gmn ngubah AJAX Education dari tugas 5 agar menggunakan DRF sambil mempertahankan desain HTML dan CSS yang udh ada?
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%206/no-2.jpeg) (arahkan kursor ke link)
+AI menjelaskan cara memigrasikan AJAX Education dari Tugas 5 ke Django REST Framework (DRF) dengan mengganti endpoint JSON lama menjadi /api/v1/education/ dan menyesuaikan struktur respons JSON dari item.fields menjadi item. AI juga memberikan panduan untuk mengintegrasikan operasi CRUD dan Star menggunakan fetch(), menyertakan CSRF token, serta mempertahankan fitur keamanan XSS melalui escapeHtml().
+
+*Tindak lanjut saya:*
+Saya memperbarui logika JavaScript pada templates/education.html agar menggunakan endpoint DRF untuk menampilkan, mencari, menambah, mengedit, menghapus, dan memberikan Star pada Education tanpa reload halaman. Saya tetap mempertahankan struktur HTML dan class CSS dari Tugas 5 agar desain website tidak berubah. Selain itu, saya mempertahankan debounce pencarian, toast, dan penanganan error, serta menambahkan indikator jumlah hasil pencarian dan tombol retry sebagai improvisasi UI/UX. Saya kemudian melakukan pengujian melalui browser dan memastikan operasi tambah, Star, serta hapus menghasilkan status HTTP yang sesuai (201, 200, dan 204).
+
+
+### 3. Pengujian Endpoint Star dan kegagalannya 
+*Prompt:*
+- test case aku gagal 1. knp test GET ke endpoint Star menghasilkan 403, padahal pengujian mengharapkan 405?
+
+*Hasil dari AI:*
+Screenshoot chat bisa diakses ![disini](Dokumentasi%20AI%20Tugas%206/no-3.jpeg) (arahkan kursor ke link)
+AI menjelaskan bahwa kegagalan test terjadi karena request GET ke endpoint Star dilakukan tanpa autentikasi. Django REST Framework memeriksa permission IsAuthenticated terlebih dahulu sehingga mengembalikan status 403 (Forbidden), sedangkan status 405 (Method Not Allowed) muncul ketika pengguna yang sudah terautentikasi mencoba menggunakan metode HTTP yang tidak diizinkan. AI menyarankan penggunaan force_authenticate() agar pengujian benar-benar berfokus pada pembatasan HTTP method.
+
+*Tindak lanjut saya:*
+Saya menganalisis hasil kegagalan test dan menambahkan self.client.force_authenticate(user=self.visitor) sebelum assertion status 405 pada test tambahan Education. Saya tidak mengubah permission API maupun test bawaan Tutorial 7 karena implementasi autentikasinya sudah sesuai. Setelah itu, saya menjalankan ulang automated testing untuk memverifikasi hak akses dan perilaku endpoint Star.

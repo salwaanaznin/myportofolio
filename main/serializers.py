@@ -1,7 +1,7 @@
 from django.utils.html import strip_tags
 from rest_framework import serializers
 
-from main.models import Project
+from main.models import Project, Education
 
 class ProjectSerializer(serializers.ModelSerializer):
     star_count = serializers.SerializerMethodField()
